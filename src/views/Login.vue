@@ -1,5 +1,8 @@
 <template>
-  <hm-header>登录</hm-header>
+  <div>
+    <hm-header>登录</hm-header>
+    <hm-logo></hm-logo>
+  </div>
 </template>
 
 <script>

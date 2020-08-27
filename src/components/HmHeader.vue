@@ -31,8 +31,8 @@ export default {
       width: 50px;
     }
     .title {
-        flex: 1;
-        font-weight: 700;
+      flex: 1;
+      font-weight: 700;
     }
   }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <hm-header>注册</hm-header>
+  <div>
+    <hm-header>注册</hm-header>
+    <my-logo></my-logo>
+  </div>
 </template>
 
 <script>
