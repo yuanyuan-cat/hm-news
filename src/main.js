@@ -9,6 +9,9 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 // 引入rem适配配置
 import 'amfe-flexible'
+// 引入注册全局头部组件
+import HmHeader from './components/HmHeader.vue'
+Vue.component('hm-header', HmHeader)
 
 Vue.use(Vant)
 

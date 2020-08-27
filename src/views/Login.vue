@@ -1,6 +1,5 @@
 <template>
-  <div>
-  </div>
+  <hm-header>登录</hm-header>
 </template>
 
 <script>
