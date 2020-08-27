@@ -1,5 +1,5 @@
 <template>
-  <div>注册组件</div>
+  <div></div>
 </template>
 
 <script>
