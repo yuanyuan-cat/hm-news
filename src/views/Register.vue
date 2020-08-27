@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -62,7 +61,7 @@ export default {
   },
   methods: {
     async register () {
-      const res = await axios.post('http://127.0.0.1:3000/register', this.user)
+      const res = await this.$axios.post('/register', this.user)
       const { statusCode, message } = res.data
       if (statusCode === 200) {
         this.$toast.success(message)
