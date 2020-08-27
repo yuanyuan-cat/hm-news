@@ -12,13 +12,13 @@ export default {
 
 <style lang="less">
   .logo {
-    padding: 20px 0;
+    margin-top: 30px;;
     height: 150px;
     line-height: 150px;
     text-align: center;
     color: #d81e06;
     .iconnew {
-      font-size: 140px;
+      font-size: 120px;
     }
   }
 </style>
