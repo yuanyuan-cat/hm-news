@@ -13,13 +13,19 @@ import 'amfe-flexible'
 import HmHeader from './components/HmHeader.vue'
 // 引入全局logo组件
 import HmLogo from './components/HmLogo.vue'
+// 引入导航条组件
+import HmNavItem from './components/HmNavItem.vue'
+
 import axios from 'axios'
+
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
 
 Vue.component('hm-header', HmHeader)
 
 Vue.component('hm-logo', HmLogo)
+
+Vue.component('hm-navitem', HmNavItem)
 
 Vue.use(Vant)
 

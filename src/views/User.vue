@@ -14,6 +14,22 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </div>
+    <!-- 导航 -->
+    <hm-navitem>
+      <template>我的关注</template>
+      <template v-slot:content>关注的用户</template>
+    </hm-navitem>
+    <hm-navitem>
+      <template>我的跟帖</template>
+      <template v-slot:content>跟帖/回复</template>
+    </hm-navitem>
+    <hm-navitem>
+      <template>我的收藏</template>
+      <template v-slot:content>文章/视频</template>
+    </hm-navitem>
+    <hm-navitem>
+      <template>设置</template>
+    </hm-navitem>
   </div>
 </template>
 
