@@ -15,21 +15,25 @@
       </div>
     </div>
     <!-- 导航 -->
-    <hm-navitem>
+    <hm-navitem to="/follow">
       <template>我的关注</template>
       <template v-slot:content>关注的用户</template>
     </hm-navitem>
-    <hm-navitem>
+    <hm-navitem to="/comment">
       <template>我的跟帖</template>
       <template v-slot:content>跟帖/回复</template>
     </hm-navitem>
     <hm-navitem>
-      <template>我的收藏</template>
+      <template to="/star">我的收藏</template>
       <template v-slot:content>文章/视频</template>
     </hm-navitem>
-    <hm-navitem>
+    <hm-navitem to="/edit">
       <template>设置</template>
     </hm-navitem>
+    <!-- 底部 -->
+    <div class="exit">
+      退出当前账号
+    </div>
   </div>
 </template>
 
@@ -42,11 +46,11 @@ export default {
 <style lang="less" scoped>
   .user {
     border-top: 40px solid #666;
+    font-size: 16px;
     .header {
       display: flex;
       align-items: center;
       padding: 20px 10px;
-      font-size: 16px;
       border-bottom: 5px solid #ccc;
       .avatar img {
         width: 70px;
@@ -65,6 +69,11 @@ export default {
           color: #ccc;
         }
       }
+    }
+    .exit {
+      margin-top: 20px;
+      text-align: center;
+      color: red;
     }
   }
 </style>

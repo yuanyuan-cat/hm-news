@@ -1,5 +1,5 @@
 <template>
-  <div class="navItem">
+  <div class="navItem" @click="clickFn">
     <div class="title"><slot></slot></div>
     <div class="content"><slot name="content"></slot></div>
     <div class="arrow">
@@ -10,7 +10,16 @@
 
 <script>
 export default {
-
+  methods: {
+    clickFn () {
+      if (this.to) {
+        this.$router.push(this.to)
+      }
+    }
+  },
+  props: {
+    to: String
+  }
 }
 </script>
 
