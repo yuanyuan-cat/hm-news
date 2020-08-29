@@ -52,7 +52,11 @@ export default {
         username: this.username,
         password: this.password
       })
-      const { statusCode, message } = res.data
+      const { statusCode, message, data } = res.data
+      // 储存id和token
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('userId', data.user.id)
+      // 登录成功，跳转到user页面
       if (statusCode === 200) {
         this.$toast.success(message)
         this.$router.push('/user')

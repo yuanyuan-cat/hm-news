@@ -18,6 +18,10 @@ import HmNavItem from './components/HmNavItem.vue'
 
 import axios from 'axios'
 
+import moment from 'moment'
+
+Vue.filter('time', input => moment(input).format('YYYY-MM-DD'))
+
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
 

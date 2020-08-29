@@ -3,12 +3,12 @@
     <!-- 头部 -->
     <div class="header">
       <div class="avatar">
-        <img src="../assets/1.gif" alt="">
+        <img :src="$axios.defaults.baseURL + user.head_img" alt="">
       </div>
       <div class="info">
-        <span class="iconfont iconxingbienan"></span>
-        <span>火星网友</span>
-        <div class="time">2019-10-10</div>
+        <span class="iconfont" :class="user.gender === 1 ? 'iconxingbienan' : 'iconxingbienv'"></span>
+        <span>{{user.nickname}}</span>
+        <div class="time">{{user.create_date | time}}</div>
       </div>
       <div class="arrow">
         <span class="iconfont iconjiantou1"></span>
@@ -39,7 +39,24 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      user: ''
+    }
+  },
+  async created () {
+    const id = localStorage.getItem('userId')
+    const token = localStorage.getItem('token')
+    const res = await this.$axios.get(`/user/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+    const { data, statusCode } = res.data
+    if (statusCode === 200) {
+      this.user = data
+    }
+  }
 }
 </script>
 
@@ -60,9 +77,14 @@ export default {
       .info {
         flex: 1;
         margin-left: 20px;
-        .iconxingbienan {
+        .iconfont {
           margin-right: 5px;
+        }
+        .iconxingbienan {
           color: skyblue;
+        }
+        .iconxingbienv {
+          color: pink;
         }
         .time {
           margin-top: 5px;
