@@ -60,11 +60,16 @@ export default {
         this.$toast.fail(message)
       }
     }
+  },
+  created () {
+    const { username, password } = this.$route.params
+    this.username = username
+    this.password = password
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .van-form {
     margin-top: 30px;
   }
