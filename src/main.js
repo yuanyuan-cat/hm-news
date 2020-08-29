@@ -19,7 +19,7 @@ import HmNavItem from './components/HmNavItem.vue'
 import axios from 'axios'
 
 import moment from 'moment'
-
+// 设置全局的time过滤器
 Vue.filter('time', input => moment(input).format('YYYY-MM-DD'))
 
 Vue.prototype.$axios = axios
