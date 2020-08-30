@@ -55,11 +55,6 @@ export default {
     const { data, statusCode } = res.data
     if (statusCode === 200) {
       this.user = data
-    } else if (statusCode === 401) {
-      this.$toast('验证失败')
-      this.$router.push('/login')
-      localStorage.removeItem('userId')
-      localStorage.removeItem('token')
     }
   }
 }
