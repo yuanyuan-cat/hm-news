@@ -30,9 +30,8 @@
     <hm-navitem to="/edit">
       <template>设置</template>
     </hm-navitem>
-    <!-- 底部 -->
-    <div class="exit">
-      退出当前账号
+    <div class="footer">
+      <van-button type="danger" block @click="logout">退出</van-button>
     </div>
   </div>
 </template>
@@ -55,6 +54,22 @@ export default {
     const { data, statusCode } = res.data
     if (statusCode === 200) {
       this.user = data
+    }
+  },
+  methods: {
+    async logout () {
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '您确定要退出吗？'
+        })
+      } catch {
+        return this.$toast('取消退出')
+      }
+      localStorage.removeItem('userId')
+      localStorage.removeItem('token')
+      this.$router.push('/login')
+      this.$toast.success('退出成功')
     }
   }
 }
@@ -92,10 +107,8 @@ export default {
         }
       }
     }
-    .exit {
-      margin-top: 20px;
-      text-align: center;
-      color: red;
+    .footer {
+      padding: 20px;
     }
   }
 </style>
