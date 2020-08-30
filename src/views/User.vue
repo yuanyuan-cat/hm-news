@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <!-- 头部 -->
-    <div class="header">
+    <div class="header" @click="$router.push('/edit-user')">
       <div class="avatar">
         <img :src="$axios.defaults.baseURL + user.head_img" alt="">
       </div>
@@ -23,11 +23,11 @@
       <template>我的跟帖</template>
       <template v-slot:content>跟帖/回复</template>
     </hm-navitem>
-    <hm-navitem>
-      <template to="/star">我的收藏</template>
+    <hm-navitem to="/star">
+      <template>我的收藏</template>
       <template v-slot:content>文章/视频</template>
     </hm-navitem>
-    <hm-navitem to="/edit">
+    <hm-navitem to="/edit-user">
       <template>设置</template>
     </hm-navitem>
     <div class="footer">
