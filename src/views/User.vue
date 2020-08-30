@@ -1,7 +1,8 @@
 <template>
   <div class="user">
     <!-- 头部 -->
-    <div class="header" @click="$router.push('/edit-user')">
+    <hm-topbar></hm-topbar>
+    <div class="header" @click="$router.push('/user-edit')">
       <div class="avatar">
         <img :src="$axios.defaults.baseURL + user.head_img" alt="">
       </div>
@@ -27,7 +28,7 @@
       <template>我的收藏</template>
       <template v-slot:content>文章/视频</template>
     </hm-navitem>
-    <hm-navitem to="/edit-user">
+    <hm-navitem to="/user-edit">
       <template>设置</template>
     </hm-navitem>
     <div class="footer">
@@ -77,7 +78,6 @@ export default {
 
 <style lang="less" scoped>
   .user {
-    border-top: 40px solid #666;
     font-size: 16px;
     .header {
       display: flex;

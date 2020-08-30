@@ -15,6 +15,9 @@ import HmHeader from './components/HmHeader.vue'
 import HmLogo from './components/HmLogo.vue'
 // 引入导航条组件
 import HmNavItem from './components/HmNavItem.vue'
+// 引入顶部条组件
+import HmTopNav from './components/HmTopBar.vue'
+
 // 引入axios
 import axios from 'axios'
 // 引入moment
@@ -51,6 +54,8 @@ Vue.component('hm-header', HmHeader)
 Vue.component('hm-logo', HmLogo)
 
 Vue.component('hm-navitem', HmNavItem)
+
+Vue.component('hm-topbar', HmTopNav)
 
 Vue.use(Vant)
 

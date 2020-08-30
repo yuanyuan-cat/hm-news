@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hm-topbar></hm-topbar>
     <hm-header>登录</hm-header>
     <hm-logo></hm-logo>
     <van-form @submit="login">
