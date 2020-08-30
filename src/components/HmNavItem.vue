@@ -12,9 +12,12 @@
 export default {
   methods: {
     clickFn () {
+      // 跳转页面
       if (this.to) {
         this.$router.push(this.to)
       }
+      // 触发组件上click事件
+      this.$emit('click')
     }
   },
   props: {
