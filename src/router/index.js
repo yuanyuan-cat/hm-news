@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import User from '../views/User.vue'
 import UserEdit from '../views/UserEdit.vue'
+import MyFollow from '../views/MyFollow.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +18,9 @@ const routes = [
   { path: '/login', component: Login, name: 'login' },
   { path: '/register', component: Register, name: 'register' },
   { path: '/user', component: User, name: 'user' },
-  { path: '/user-edit', component: UserEdit, name: 'user-edit' }
+  { path: '/user-edit', component: UserEdit, name: 'user-edit' },
+  { path: '/follow', component: MyFollow, name: 'my-follow' }
+
 ]
 
 const router = new VueRouter({
@@ -25,7 +28,7 @@ const router = new VueRouter({
 })
 // 设置全局的导航护卫
 const token = localStorage.getItem('token')
-const authorPath = ['/user', '/user-edit']
+const authorPath = ['/user', '/user-edit', '/follow']
 router.beforeEach((to, from, next) => {
   if (!authorPath.includes(to.path) || token) {
     next()

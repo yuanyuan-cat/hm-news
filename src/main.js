@@ -23,11 +23,13 @@ import axios from 'axios'
 // 引入moment
 import moment from 'moment'
 // 设置全局的time过滤器
-Vue.filter('time', input => moment(input).format('YYYY-MM-DD'))
+Vue.filter('time', (input, str = 'YYYY-MM-DD') => moment(input).format(str))
 // 设置axios的全局基本设置
 Vue.prototype.$axios = axios
 // 基地址设置
-axios.defaults.baseURL = 'http://127.0.0.1:3000'
+const URL = 'http://127.0.0.1:3000'
+axios.defaults.baseURL = URL
+Vue.prototype.$base = URL
 // 请求拦截器设置
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
