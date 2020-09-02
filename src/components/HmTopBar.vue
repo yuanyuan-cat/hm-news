@@ -1,5 +1,8 @@
 <template>
-  <div class="hm-topbar"></div>
+  <div>
+    <div class="hm-topbar"></div>
+    <div class="placeholder"></div>
+  </div>
 </template>
 
 <script>
@@ -10,7 +13,16 @@ export default {
 
 <style scoped>
   .hm-topbar {
-     height: 40px;
-     background-color: #666;
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    background-color: #666;
+    z-index: 999;
+  }
+  .placeholder {
+    width: 100%;
+    height: 40px;
+    background-color: #666;
+
   }
 </style>
