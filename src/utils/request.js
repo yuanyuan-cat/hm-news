@@ -13,6 +13,14 @@ Vue.prototype.$axios = axios
 const URL = 'http://127.0.0.1:3000'
 axios.defaults.baseURL = URL
 Vue.prototype.$base = URL
+// 封装一个处理函数路径的函数
+Vue.prototype.$URL = url => {
+  if (url.startsWith('http')) {
+    return url
+  } else {
+    return URL + url
+  }
+}
 // 请求拦截器设置
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('token')

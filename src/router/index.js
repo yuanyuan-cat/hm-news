@@ -7,6 +7,7 @@ import User from '../views/User.vue'
 import UserEdit from '../views/UserEdit.vue'
 import MyFollow from '../views/MyFollow.vue'
 import MyComment from '../views/MyComment.vue'
+import MyStar from '../views/MyStar.vue'
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,8 @@ const routes = [
   { path: '/user', component: User, name: 'user' },
   { path: '/user-edit', component: UserEdit, name: 'user-edit' },
   { path: '/follow', component: MyFollow, name: 'my-follow' },
-  { path: '/comment', component: MyComment, name: 'mt-comment' }
+  { path: '/comment', component: MyComment, name: 'mt-comment' },
+  { path: '/star', component: MyStar, name: 'my-star' }
 ]
 
 const router = new VueRouter({
