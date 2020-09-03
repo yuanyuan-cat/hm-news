@@ -61,6 +61,11 @@ export default {
       justify-content: space-between;
       flex: 1;
       .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
         font-size: 18px;
       }
       .ref {
