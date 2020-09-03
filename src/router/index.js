@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// 导入组件
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import User from '../views/User.vue'
-import UserEdit from '../views/UserEdit.vue'
-import MyFollow from '../views/MyFollow.vue'
-import MyComment from '../views/MyComment.vue'
-import MyStar from '../views/MyStar.vue'
+// 导入组件（user）
+import Login from '../views/user/Login.vue'
+import Register from '../views/user/Register.vue'
+import User from '../views/user/User.vue'
+import UserEdit from '../views/user/UserEdit.vue'
+import MyFollow from '../views/user/MyFollow.vue'
+import MyComment from '../views/user/MyComment.vue'
+import MyStar from '../views/user/MyStar.vue'
+// 导入组件（news）
+import Index from '../views/news/index.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +25,8 @@ const routes = [
   { path: '/user-edit', component: UserEdit, name: 'user-edit' },
   { path: '/follow', component: MyFollow, name: 'my-follow' },
   { path: '/comment', component: MyComment, name: 'mt-comment' },
-  { path: '/star', component: MyStar, name: 'my-star' }
+  { path: '/star', component: MyStar, name: 'my-star' },
+  { path: '/', component: Index, name: 'index' }
 ]
 
 const router = new VueRouter({

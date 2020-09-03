@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .logo {
     margin-top: 30px;;
     height: 150px;
