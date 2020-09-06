@@ -60,6 +60,13 @@ export default {
   methods: {
     // 封装获取导航栏目的函数
     async getTabs () {
+      // 判断本地缓存是否有数据
+      if (localStorage.getItem('delTabs')) {
+        this.tabName = JSON.parse(localStorage.getItem('delTabs'))
+        // 导航栏目请求成功后，发送请求获取第一栏的新闻列表
+        this.getPosts(this.tabName[this.active].id)
+        return
+      }
       const res = await this.$axios.get('/category')
       const { data, statusCode } = res.data
       if (statusCode === 200) {
