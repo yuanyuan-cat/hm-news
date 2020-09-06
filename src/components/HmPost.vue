@@ -1,7 +1,21 @@
 <template>
   <div>
+     <!-- 视频模板 -->
+    <div class="vedioPost" v-if="post.type === 2">
+      <div class="title">
+        {{post.title}}
+      </div>
+      <div class="img">
+        <img :src="$URL(post.cover[0].url)" alt="">
+        <span class="iconfont iconshipin"></span>
+      </div>
+      <div class="ref">
+        <span>{{post.user.nickname}}</span>
+        <span>{{post.comment_length}}跟帖</span>
+      </div>
+    </div>
     <!-- 单图片模板 -->
-    <div class="singlePicPost" v-if="post.cover.length===1 && !post.content.startsWith('http')">
+    <div class="singlePicPost" v-else-if="post.cover.length === 1">
       <div class="content">
         <div class="title">
           {{post.title}}
@@ -16,7 +30,7 @@
       </div>
     </div>
     <!-- 三张图片模式 -->
-    <div class="mutiplePicPost" v-if="post.cover.length===3 && !post.content.startsWith('http')">
+    <div class="mutiplePicPost" v-else-if="post.cover.length === 3">
       <div class="title">
         {{post.title}}
       </div>
@@ -24,20 +38,6 @@
         <img :src="$URL(post.cover[0].url)" alt="">
         <img :src="$URL(post.cover[1].url)" alt="">
         <img :src="$URL(post.cover[2].url)" alt="">
-      </div>
-      <div class="ref">
-        <span>{{post.user.nickname}}</span>
-        <span>{{post.comment_length}}跟帖</span>
-      </div>
-    </div>
-    <!-- 视频模板 -->
-    <div class="vedioPost" v-if="post.content.startsWith('http')">
-      <div class="title">
-        {{post.title}}
-      </div>
-      <div class="img">
-        <img :src="$URL(post.cover[0].url)" alt="">
-        <span class="iconfont iconshipin"></span>
       </div>
       <div class="ref">
         <span>{{post.user.nickname}}</span>

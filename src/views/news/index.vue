@@ -11,11 +11,17 @@
         <span>搜索新闻</span>
       </div>
       <div class="user">
-        <span class="iconfont iconwode"></span>
+        <span class="iconfont iconwode" @click="$router.push('/user')"></span>
       </div>
     </div>
     <!-- 导航 -->
-    <van-tabs v-model="active" sticky animated swipeable @change="change">
+    <!-- 导航管理图标 -->
+    <van-sticky class="more-sticky">
+      <div class="more" @click="$router.push('/manage')">
+        <span class="iconfont iconjiantou1"></span>
+      </div>
+    </van-sticky>
+    <van-tabs v-model="active" sticky animated swipeable>
       <!-- 导航栏目列表 -->
       <van-tab :title="item.name" v-for="item in tabName" :key="item.id">
         <!-- 下拉刷新 -->
@@ -41,7 +47,6 @@ export default {
   data () {
     return {
       active: 0,
-      tabId: '',
       tabName: [],
       posts: [],
       pageIndex: 1,
@@ -60,12 +65,15 @@ export default {
       if (statusCode === 200) {
         this.tabName = data
         // 导航栏目请求成功后，发送请求获取第一栏的新闻列表
-        this.tabId = this.tabName[0].id
-        this.getPosts(this.tabId)
+        this.getPosts(this.tabName[this.active].id)
       }
     },
     // 封装获取栏目文章列表的函数
     async getPosts (id) {
+      // 判断是否需要清空posts数据
+      if (this.pageIndex === 1) {
+        this.posts = []
+      }
       const res = await this.$axios.get('/post', {
         params: {
           category: id,
@@ -77,6 +85,7 @@ export default {
       if (statusCode === 200) {
         // 累加数据
         this.posts = [...this.posts, ...data]
+        console.log(this.posts)
         // 修改loading和refreshing的值
         this.loading = false
         this.refreshing = false
@@ -90,29 +99,30 @@ export default {
     // 上拉刷新，页面增1，请求新数据
     onLoad () {
       this.pageIndex++
-      this.getPosts(this.tabId)
+      this.getPosts(this.tabName[this.active].id)
     },
     // 下拉刷新
     onRefresh () {
       // 还原初始化值
       this.pageIndex = 1
       this.finished = false
+      this.loading = true
       this.posts = []
-      this.getPosts(this.tabId)
-    },
-    // 导航栏目切换
-    change (name) {
-      // 还原初始化值
-      this.pageIndex = 1
-      this.finished = false
-      this.posts = []
-      // 根据传来的下标来重新发送请求
-      this.tabId = this.tabName[name].id
-      this.getPosts(this.tabId)
+      this.getPosts(this.tabName[this.active].id)
     }
   },
   created () {
     this.getTabs()
+  },
+  // 导航栏切换，监听active的数据
+  watch: {
+    active (value) {
+      this.pageIndex = 1
+      this.posts = []
+      this.loading = true
+      this.finished = false
+      this.getPosts(this.tabName[value].id)
+    }
   }
 }
 </script>
@@ -152,10 +162,29 @@ export default {
       }
     }
   }
-  /deep/ .van-sticky {
-    z-index: 999;
+  /deep/ .van-sticky--fixed {
+    top: 40px;
   }
   /deep/ .van-tab__text {
     font-size: 18px;
   }
+  /deep/ .van-tabs__wrap {
+    width: 85%;
+  }
+  .more {
+  width: 15%;
+  height: 44px;
+  position: absolute;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  text-align: center;
+  line-height: 44px;
+}
+.more-sticky {
+  /deep/ .van-sticky--fixed {
+    z-index: 1000;
+    top: 40px;
+  }
+}
 </style>

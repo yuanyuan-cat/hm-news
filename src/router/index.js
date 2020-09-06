@@ -9,7 +9,7 @@ import MyFollow from '../views/user/MyFollow.vue'
 import MyComment from '../views/user/MyComment.vue'
 import MyStar from '../views/user/MyStar.vue'
 // 导入组件（news）
-import Index from '../views/news/index.vue'
+import Index from '../views/news/Index.vue'
 
 Vue.use(VueRouter)
 
