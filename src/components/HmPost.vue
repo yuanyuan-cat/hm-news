@@ -1,7 +1,7 @@
 <template>
   <div @click="$router.push(`/post-detail/${post.id}`)">
      <!-- 视频模板 -->
-    <div class="vedioPost" v-if="post.type === 2">
+    <div class="videoPost" v-if="post.type === 2">
       <div class="title">
         {{post.title}}
       </div>
@@ -108,7 +108,7 @@ export default {
     }
   }
 // 视频模板
-  .vedioPost {
+  .videoPost {
     padding: 20px 10px;
     border-bottom: 1px solid #ccc;
     .img {
