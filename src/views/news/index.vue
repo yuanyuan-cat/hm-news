@@ -92,7 +92,6 @@ export default {
       if (statusCode === 200) {
         // 累加数据
         this.posts = [...this.posts, ...data]
-        console.log(this.posts)
         // 修改loading和refreshing的值
         this.loading = false
         this.refreshing = false

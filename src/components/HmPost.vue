@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="$router.push(`/post-detail/${post.id}`)">
      <!-- 视频模板 -->
     <div class="vedioPost" v-if="post.type === 2">
       <div class="title">

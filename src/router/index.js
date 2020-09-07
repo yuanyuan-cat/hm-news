@@ -11,6 +11,7 @@ import MyStar from '../views/user/MyStar.vue'
 // 导入组件（news）
 import Index from '../views/news/Index.vue'
 import Manage from '../views/news/Manage.vue'
+import PostDetail from '../views/news/PostDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,8 @@ const routes = [
   { path: '/comment', component: MyComment, name: 'mt-comment' },
   { path: '/star', component: MyStar, name: 'my-star' },
   { path: '/', component: Index, name: 'index' },
-  { path: '/manage', component: Manage, name: 'manage' }
+  { path: '/manage', component: Manage, name: 'manage' },
+  { path: '/post-detail/:id', component: PostDetail, name: 'post-detail' }
 ]
 
 const router = new VueRouter({
