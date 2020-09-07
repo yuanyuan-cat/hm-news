@@ -54,13 +54,18 @@ export default {
         password: this.password
       })
       const { statusCode, message, data } = res.data
-      // 储存id和token
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userId', data.user.id)
-      // 登录成功，跳转到user页面
+      // 登录成功，
       if (statusCode === 200) {
+        // 储存id和token
         this.$toast.success(message)
-        this.$router.push('/user')
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('userId', data.user.id)
+        // 跳转页面
+        if (this.$route.query.back) {
+          this.$router.back()
+        } else {
+          this.$router.push('/user')
+        }
       } else {
         this.$toast.fail(message)
       }
