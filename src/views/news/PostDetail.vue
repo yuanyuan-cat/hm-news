@@ -41,10 +41,30 @@
         </span>
       </div>
     </div>
+    <!-- 评论列表 -->
+    <div class="commentsList">
+      <h4>精彩跟帖</h4>
+      <!-- 评论列表组件 -->
+      <hm-comment :comment="item" v-for="item in commentsList" :key="item.id"></hm-comment>
+    </div>
     <!-- 页面底部 -->
-    <div class="newsBottom">
-      <div class="reply">
-        <input type="text" placeholder="写跟帖">
+    <!-- textarea模块 -->
+    <div class="textareaBottom replyBottom" v-if="isShowTextarea">
+      <div class="replyTextarea">
+        <textarea
+        placeholder="回复：@xxxx"
+        ref="textarea"
+        @keyup.enter="publish"
+        @blur="onBlur"
+        v-model="commentContent">
+        </textarea>
+      </div>
+      <van-button type="danger" @click="publish">发送</van-button>
+    </div>
+    <!-- input框模块 -->
+    <div class="inputBottom replyBottom" v-else>
+      <div class="replyInput">
+        <input type="text" placeholder="写跟帖" @focus="onFocus">
       </div>
       <div class="comments">
         <span class="iconfont iconpinglun-"></span>
@@ -66,11 +86,15 @@ export default {
     return {
       post: {
         user: {}
-      }
+      },
+      commentsList: [],
+      isShowTextarea: false,
+      commentContent: ''
     }
   },
   created () {
     this.getDetail()
+    this.getComments()
   },
   methods: {
     // 封装请求渲染文章数据的函数
@@ -81,6 +105,16 @@ export default {
       if (statusCode === 200) {
         console.log(data)
         this.post = data
+      }
+    },
+    // 封装请求渲染评论列表的函数
+    async getComments () {
+      const id = this.$route.params.id
+      const res = await this.$axios.get(`/post_comment/${id}`)
+      const { data, statusCode } = res.data
+      if (statusCode === 200) {
+        // console.log(data)
+        this.commentsList = data
       }
     },
     // 封装获取视频地址的函数
@@ -155,6 +189,33 @@ export default {
       const res = await this.$axios.get(`/post_star/${this.post.id}`)
       if (res.data.statusCode === 200) {
         this.getDetail()
+      }
+    },
+    // 底部评论模块显示功能
+    async onFocus () {
+      this.isShowTextarea = true
+      // 等待DOM更新
+      await this.$nextTick()
+      this.$refs.textarea.focus()
+    },
+    // 底部评论发表
+    async publish () {
+      const res = await this.$axios.post(`/post_comment/${this.post.id}`, {
+        content: this.commentContent
+      })
+      const { message, statusCode } = res.data
+      if (statusCode === 200) {
+        this.$toast.success(message)
+        this.commentContent = ''
+        this.isShowTextarea = false
+        this.getComments()
+        this.getDetail()
+      }
+    },
+    // 底部评论框隐藏
+    onBlur () {
+      if (!this.commentContent.trim()) {
+        this.isShowTextarea = false
       }
     }
   }
@@ -253,14 +314,29 @@ export default {
     }
   }
 }
+// 评论列表样式
+.commentsList {
+  padding-bottom: 70px;
+  h4 {
+    margin: 10px 0;
+    text-align: center;
+    font-weight: 400;
+  }
+}
 // 页面底部样式
-.newsBottom {
+.replyBottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
   display: flex;
-  margin: 20px 0;
+  padding: 10px;
+  background-color: #fff;
+}
+// 搜索input样式
+.inputBottom {
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  .reply {
+  .replyInput {
     width: 200px;
     input {
       padding-left: 20px;
@@ -299,6 +375,29 @@ export default {
   }
   .collect {
     color: orange;
+  }
+}
+// 搜索textarea样式
+.textareaBottom {
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 16px;
+  .replyTextarea {
+    width: 280px;
+    height: 100px;
+    textarea {
+      padding: 15px;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #ddd;
+      border-radius: 10px;
+    }
+  }
+  .van-button {
+    height: 30px;
+    width: 70px;
+    border-radius: 15px;
   }
 }
 </style>
