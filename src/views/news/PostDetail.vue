@@ -121,7 +121,6 @@ export default {
       const res = await this.$axios.get(`/post_comment/${id}`)
       const { data, statusCode } = res.data
       if (statusCode === 200) {
-        console.log(data)
         this.commentsList = data
       }
     },

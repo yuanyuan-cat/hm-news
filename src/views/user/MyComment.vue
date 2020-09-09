@@ -24,8 +24,8 @@
           <!-- 最新评论 -->
           <div class="newComment">
             <p>{{item.content}}</p>
-            <div class="origin">
-              <span>原文：{{item.post.title}}</span>
+            <div class="origin" @click="$router.push(`/post-detail/${item.post.id}`)">
+              <span class="one-line-cut">原文：{{item.post.title}}</span>
               <span class="iconfont iconjiantou1"></span>
             </div>
           </div>
@@ -113,7 +113,10 @@ export default {
       font-size: 18px;
       .origin {
         margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
         color: #999;
+        font-size: 14px;
       }
     }
   }
