@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <hm-floor @reply="replyFn" :count="count - 1" :comment="comment.parent" v-if="comment.parent"></hm-floor> -->
     <hm-floor :count="count - 1" :comment="comment.parent" v-if="comment.parent"></hm-floor>
     <div class="floor">
       <div class="header">
@@ -7,7 +8,7 @@
           <span class="name">{{count}} {{comment.user.nickname}}</span>
           <span class="time">{{comment.create_date | now}}</span>
         </div>
-        <div class="reply">
+        <div class="reply" @click="reply">
           回复
         </div>
       </div>
@@ -24,6 +25,17 @@ export default {
   props: {
     comment: Object,
     count: Number
+  },
+  methods: {
+    reply () {
+      this.$bus.$emit('reply', this.comment.id, this.comment.user.nickname)
+    }
+    // reply () {
+    //   this.$emit('reply', this.comment.id, this.comment.user.nickname)
+    // },
+    // replyFn () {
+    //   this.$emit('reply', this.comment.id, this.comment.user.nickname)
+    // }
   }
 }
 </script>

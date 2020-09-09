@@ -9,10 +9,16 @@
         <div class="name">{{comment.user.nickname}}</div>
         <div class="time">{{comment.create_date | now}}</div>
       </div>
-      <div class="reply">回复</div>
+      <div class="reply" @click="reply">回复</div>
     </div>
     <!-- 楼层组件 -->
-    <hm-floor :count="count" class="first" :comment="comment.parent" v-if="comment.parent"></hm-floor>
+    <!-- @reply="onReply" -->
+    <hm-floor
+    :count="count"
+    class="first"
+    :comment="comment.parent"
+    v-if="comment.parent">
+    </hm-floor>
     <!-- 评论内容 -->
     <div class="content">
       {{comment.content}}
@@ -38,7 +44,18 @@ export default {
       } else {
         return num
       }
+    },
+    reply () {
+      this.$bus.$emit('reply', this.comment.id, this.comment.user.nickname)
     }
+    // // 把id和nickname传给父组件
+    // reply (id, nickname) {
+    //   this.$emit('reply', this.comment.id, this.comment.user.nickname)
+    // },
+    // // 把从floor接收到的id和nickname传给父组件
+    // onReply (id, nickname) {
+    //   this.$emit('reply', id, nickname)
+    // }
   }
 }
 </script>

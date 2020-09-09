@@ -45,6 +45,7 @@
     <div class="commentsList">
       <h4>精彩跟帖</h4>
       <!-- 评论列表组件 -->
+      <!-- <hm-comment @reply="onReply" :comment="item" v-for="item in commentsList" :key="item.id"></hm-comment> -->
       <hm-comment :comment="item" v-for="item in commentsList" :key="item.id"></hm-comment>
     </div>
     <!-- 页面底部 -->
@@ -52,7 +53,7 @@
     <div class="textareaBottom replyBottom" v-if="isShowTextarea">
       <div class="replyTextarea">
         <textarea
-        placeholder="回复：@xxxx"
+        :placeholder="'回复' + nickname"
         ref="textarea"
         @keyup.enter="publish"
         @blur="onBlur"
@@ -89,12 +90,20 @@ export default {
       },
       commentsList: [],
       isShowTextarea: false,
-      commentContent: ''
+      commentContent: '',
+      commentId: '',
+      nickname: ''
     }
   },
   created () {
     this.getDetail()
     this.getComments()
+    // 给bus注册reply事情
+    this.$bus.$on('reply', this.onReply)
+  },
+  destroyed () {
+    // 组件摧毁时候，摧毁reply事件
+    this.$bus.$off('reply', this.onReply)
   },
   methods: {
     // 封装请求渲染文章数据的函数
@@ -103,7 +112,6 @@ export default {
       const res = await this.$axios.get(`/post/${id}`)
       const { statusCode, data } = res.data
       if (statusCode === 200) {
-        console.log(data)
         this.post = data
       }
     },
@@ -113,7 +121,7 @@ export default {
       const res = await this.$axios.get(`/post_comment/${id}`)
       const { data, statusCode } = res.data
       if (statusCode === 200) {
-        // console.log(data)
+        console.log(data)
         this.commentsList = data
       }
     },
@@ -201,7 +209,8 @@ export default {
     // 底部评论发表
     async publish () {
       const res = await this.$axios.post(`/post_comment/${this.post.id}`, {
-        content: this.commentContent
+        content: this.commentContent,
+        parent_id: this.commentId
       })
       const { message, statusCode } = res.data
       if (statusCode === 200) {
@@ -217,6 +226,14 @@ export default {
       if (!this.commentContent.trim()) {
         this.isShowTextarea = false
       }
+    },
+    // 评论列表回复显示评论框功能
+    async onReply (id, nickname) {
+      this.isShowTextarea = true
+      this.nickname = '@' + nickname
+      this.commentId = id
+      await this.$nextTick()
+      this.$refs.textarea.focus()
     }
   }
 }

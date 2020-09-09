@@ -17,6 +17,10 @@ import './utils/vant'
 
 Vue.config.productionTip = false
 
+// 全局创建并挂载bus
+const bus = new Vue()
+Vue.prototype.$bus = bus
+
 new Vue({
   router,
   render: h => h(App)
