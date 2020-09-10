@@ -29,14 +29,14 @@
       <div class="history list">
         <h5>历史记录</h5>
         <button class="clear" @click="clear">清空历史记录</button>
-        <div class="item" v-for="item in history" :key="item" @click="goSearch(item)">{{item}}</div>
+        <div class="item one-line-cut" v-for="item in history" :key="item" @click="goSearch(item)">{{item}}</div>
       </div>
       <!-- 热门搜索 -->
       <div class="hot list">
         <h5>热门搜索</h5>
         <button class="hiden" v-if="isHiden" @click="hide">隐藏</button>
         <button class="show" v-else @click="show">显示</button>
-        <div v-show="isHotShow" class="item" v-for="item in hot" :key="item">{{item}}</div>
+        <div v-show="isHotShow" class="item one-line-cut" v-for="item in hot" :key="item" @click="goSearch(item)">{{item}}</div>
       </div>
     </div>
   </div>
@@ -89,6 +89,8 @@ export default {
         this.history.unshift(this.key)
         // 更新缓存的数据
         localStorage.setItem('history', JSON.stringify(this.history))
+        // 清空推荐列表
+        this.recommendList = []
       }
     },
     // 历史记录搜索功能
@@ -115,7 +117,6 @@ export default {
       }
       if (statusCode === 200) {
         this.recommendList = data
-        console.log(_)
       }
     }, 1000),
     // 一键清空历史记录
@@ -146,6 +147,7 @@ export default {
     key (value) {
       if (!value) {
         this.list = []
+        this.recommendList = []
       }
     }
   }
